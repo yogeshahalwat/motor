@@ -1,0 +1,68 @@
+# ========================
+# Motor Controller Project
+# ========================
+
+# ----- OS / Editor -----
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+!.vscode/extensions.json
+!.vscode/launch.json
+
+# ----- Secrets / Credentials -----
+*.env
+.env.*
+firebase-config.json
+google-services.json
+firebase_options.dart
+secrets/
+credentials/
+
+# ----- STM32 / CubeMX -----
+firmware/Debug/
+firmware/Release/
+firmware/*.o
+firmware/*.d
+firmware/*.elf
+firmware/*.bin
+firmware/*.hex
+firmware/*.map
+firmware/*.list
+firmware/*.size
+*.launch
+
+# ----- Flutter / Dart -----
+app/.dart_tool/
+app/.packages
+app/.pub-cache/
+app/.pub/
+app/build/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/*.iml
+app/.metadata
+app/android/app/debug/
+app/android/app/profile/
+app/android/app/release/
+app/android/.gradle/
+app/ios/Pods/
+app/ios/.symlinks/
+app/ios/Flutter/Flutter.framework
+app/ios/Flutter/Flutter.podspec
+
+# ----- APK builds (keep tracked intentionally if sharing) -----
+# Uncomment below to ignore APK files:
+# *.apk
+
+# ----- Python (if any scripts) -----
+__pycache__/
+*.pyc
+venv/
+
+# ----- Misc -----
+*.log
+*.tmp
+node_modules/
