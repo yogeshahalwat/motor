@@ -5,7 +5,7 @@ IoT motor controller for Indian farmers. Allows remote ON/OFF control of agricul
 
 ## Architecture
 - **MCU**: STM32G0B1CCT6 on a custom PCB (LQFP48 package)
-- **Connectivity**: GSM module (SIM7600E or A7672S recommended for 4G; SIM800L is legacy 2G reference only)
+- **Connectivity**: A7670 GSM/LTE module (4G, on-board with UFL antenna connector)
 - **Cloud**: Firebase Realtime Database (free Spark plan)
 - **Mobile App**: Flutter (Dart), Android APK sideloaded to farmer phones
 - **Communication**: STM32 → HTTPS REST API → Firebase ← Flutter app
@@ -35,19 +35,30 @@ motor/
 - **Flutter over React Native/Kotlin**: Google ecosystem (matches Firebase), cross-platform.
 - **Direct APK sideloading**: No Play Store for POC. Share .apk via WhatsApp/USB.
 - **SIM7600/A7672S recommended**: 4G, HTTPS capable. SIM800L (2G) has sunset risk and no TLS.
+- **A7670 confirmed on PCB**: Hardware friend's board uses A7670 (SIMCom 4G Cat-1 module, same family as A7672S).
 
 ## Hardware (Custom PCB)
 - **MCU**: STM32G0B1CCT6 — ARM Cortex-M0+, 64MHz, 256KB Flash, 144KB RAM
 - **Package**: LQFP48 (44 GPIO pins)
-- **GSM Module**: TBD — waiting for hardware friend's answer (SIM800L or SIM7600 or A7672S)
-- **Pin mapping**: TBD — waiting for custom PCB schematic from hardware friend
-- **Debug**: SWD interface via ST-Link V2
+- **GSM Module**: A7670 (SIMCom Cat-1 4G LTE) — on-board, UFL antenna connector, auto-powers on (no PWRKEY pin to STM32, only TX/RX)
+- **GSM UART**: USART1 — PA9 (TX), PA10 (RX)
+- **SIM**: M2M (Machine-to-Machine) IoT SIM card
+- **Pin mapping**:
+  - PA9 — USART1 TX (to A7670)
+  - PA10 — USART1 RX (from A7670)
+  - PB8 — Motor ON signal (relay/contactor control output)
+  - PB1 — Fault signal (input from motor protection relay)
+  - PB2 — Motor OK signal (input, motor running status)
+  - Physical switch — hardwired bypass (controls contactor directly, not connected to STM32)
+- **Motor**: 3-phase, 10HP — relay controls a starter/contactor (not direct motor switching)
+- **Power**: Onboard buck converter/regulator
+- **Debug**: SWD header present (SWDIO, SWCLK, GND, NRST) — flash via ST-Link V2
 
 ## Development Environment
 - **IDE**: VS Code with STM32CubeIDE extension (v3.11.0)
 - **Pin/Clock Config**: STM32CubeMX (v6.18.1) installed at `C:\Users\L118810\AppData\Local\Programs\STM32CubeMX`
-- **Compiler**: STM32CubeCLT (NOT YET INSTALLED — needed before building firmware)
-- **Flutter SDK**: NOT YET INSTALLED — needed for app development
+- **Compiler**: STM32CubeCLT — installed at `C:\ST\STM32CubeCLT_1.22.0` (ARM GCC 14.3.1, CMake 4.3.1, Ninja 1.13.2)
+- **Flutter SDK**: Installed, pinned to 3.29.3 (`C:\flutter`)
 - **Git**: Configured with personal GitHub account (yogeshahalwat), SSH over port 443
 
 ## Git Setup
@@ -73,12 +84,12 @@ motor/
 - [x] Git + GitHub setup (personal account, SSH working)
 - [x] VS Code + STM32 extension installed
 - [x] STM32CubeMX installed and working
-- [ ] STM32CubeCLT (compiler/debugger) — NOT YET INSTALLED
-- [ ] Flutter SDK — NOT YET INSTALLED
-- [ ] Firebase project — NOT YET CREATED
-- [ ] Hardware friend's answers to PCB questions (pin mapping, GSM module, power)
+- [x] STM32CubeCLT (compiler/debugger) — installed at `C:\ST\STM32CubeCLT_1.22.0`
+- [x] Flutter SDK — installed, pinned to 3.29.3 (`C:\flutter`)
+- [x] Firebase project — created (`motor-controller-be320`, Realtime DB + Phone Auth)
+- [x] Hardware friend's answers to PCB questions — A7670 on UART1, SWD header, buck regulator, 3-phase 10HP motor via starter
 - [ ] STM32 firmware development
-- [ ] Flutter app development
+- [x] Flutter app development — login + motor ON/OFF screen built, tested on emulator
 - [ ] Integration testing
 - [ ] Field deployment
 
