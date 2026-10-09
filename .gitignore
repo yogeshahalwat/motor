@@ -33,6 +33,9 @@ firmware/*.map
 firmware/*.list
 firmware/*.size
 *.launch
+# Keep release binaries for sharing with hardware friend
+!firmware/release/
+!firmware/release/*
 
 # ----- Flutter / Dart -----
 app/.dart_tool/
