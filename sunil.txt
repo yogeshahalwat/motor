@@ -1,7 +1,15 @@
-C:\Users\ishaa\Downloads\motor_controller\motor_controller.ino:15:10: fatal error: Firebase_ESP_Client.h: No such file or directory
-   15 | #include <Firebase_ESP_Client.h>
-      |          ^~~~~~~~~~~~~~~~~~~~~~~
-compilation terminated.
-exit status 1
+. Variables and constants in RAM (global, static), used 37864 / 80192 bytes (47%)
+║   SEGMENT  BYTES    DESCRIPTION
+╠══ DATA     1628     initialized variables
+╠══ RODATA   3820     constants       
+╚══ BSS      32416    zeroed variables
+. Instruction RAM (IRAM_ATTR, ICACHE_RAM_ATTR), used 60855 / 65536 bytes (92%)
+║   SEGMENT  BYTES    DESCRIPTION
+╠══ ICACHE   32768    reserved space for flash instruction cache
+╚══ IRAM     28087    code in IRAM    
+. Code in flash (default, ICACHE_FLASH_ATTR), used 509148 / 1048576 bytes (48%)
+║   SEGMENT  BYTES    DESCRIPTION
+╚══ IROM     509148   code in flash   
 
-Compilation error: Firebase_ESP_Client.h: No such file or directory
+A fatal esptool.py error occurred: Cannot configure port, something went wrong. Original message: PermissionError(13, 'A device attached to the system is not functioning.', None, 31)esptool.py v3.0
+Serial port COM3
