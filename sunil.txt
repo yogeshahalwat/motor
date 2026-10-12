@@ -10,6 +10,7 @@
 . Code in flash (default, ICACHE_FLASH_ATTR), used 509148 / 1048576 bytes (48%)
 ║   SEGMENT  BYTES    DESCRIPTION
 ╚══ IROM     509148   code in flash   
-
-A fatal esptool.py error occurred: Cannot configure port, something went wrong. Original message: PermissionError(13, 'A device attached to the system is not functioning.', None, 31)esptool.py v3.0
+esptool.py v3.0
 Serial port COM3
+
+A fatal esptool.py error occurred: could not open port 'COM3': FileNotFoundError(2, 'The system cannot find the file specified.', None, 2)
